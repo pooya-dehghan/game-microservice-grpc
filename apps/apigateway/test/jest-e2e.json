@@ -1,0 +1,18 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+  "@app/common": "C:/Users/pooya/Desktop/grpc-game/libs/common/src"
+  },
+  "resolver": "jest-module-name-mapper",
+  "globals": {
+    "ts-jest": {
+      "diagnostics": false
+    }
+  }
+}

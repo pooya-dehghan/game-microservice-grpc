@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package game;
+
+service GameService {
+  rpc CreateGame (CreateGameRequest) returns (CreateGameResponse) {}
+  rpc FindOneGame (FindOneGameRequest) returns (FindOneGameResponse) {}
+  rpc StartGame (StartGameRequest) returns (StartGameResponse) {}
+  rpc AddUserToGame (AddUserToGameRequest) returns (AddUserToGameResponse) {}
+  rpc CollectPoint(CollectPointRequest) returns (CollectPointResponse) {}
+  rpc GameFinishResults(GameFinishResultsRequest) returns (GameFinishResultsResponse) {}
+  rpc PlayerLeftGame(PlayerLeftGameRequest) returns (PlayerLeftGameResponse) {}
+  rpc ListAvailableGames (ListAvailableGamesRequest) returns (ListAvailableGamesResponse) {}
+}
+
+
+message Game {
+  string id = 1;  
+  string name = 2;
+  bool started = 4;
+}
+
+message CreateGameRequest {
+  string name = 1;
+  int32 maxMembers = 2;
+  string status = 3;
+  int32 creator = 4;
+}
+
+message CreateGameResponse {
+  string name = 1;
+  string status = 2;
+} 
+
+message FindOneGameRequest {
+  string id = 1;
+}
+
+message FindOneGameResponse {
+  string name = 1;
+  string status = 2;
+}
+
+message StartGameRequest {
+  string creator = 1;
+  string gameId = 2;
+}
+
+message StartGameResponse {
+  int32 id =1;
+  int32 creator = 2;
+  int32 maxMembers = 3;
+  string status = 4;
+}
+
+message AddUserToGameRequest {
+  int32 userToBeAdded = 1;
+  int32 gameId = 2;
+  int32 creatorId = 3;
+}
+
+message AddUserToGameResponse {
+  string name = 1;
+  string status = 2;
+}
+
+message CollectPointRequest {
+  int32 playerID = 1 ;
+  int32 gameID = 2;
+  int32 pointCollected = 3;
+}
+
+message CollectPointResponse {
+  bool success = 1;
+  bool gameFinished = 2;
+  bool userWonGame = 3;
+  int32 userWonGameID = 4;
+}
+
+message GameFinishResultsRequest {
+  int32 gameID = 1;
+}
+
+message GameFinishResultsResponse {
+  int32 winnerID = 1;
+  int32 winnerScore = 2;
+  string winnerName = 3;
+}
+
+message PlayerLeftGameRequest{
+  int32 playerID  = 1;
+  int32 gameID = 2;
+}
+
+message PlayerLeftGameResponse{ 
+  int32 playerScore = 1;
+}
+
+message ListAvailableGamesRequest {
+  int32 userID = 1;
+}
+
+message ListAvailableGamesResponse {
+  Games availableGames = 1;
+}
+
+message Games { 
+  repeated Game games = 1;
+}
+
+message Users {
+  repeated int32 users = 1;
+}
+
+
+message PaginationDto {
+  int32 page = 1;
+  int32 skip = 2;
+}

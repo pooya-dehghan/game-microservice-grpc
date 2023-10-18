@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package leaderboard;
+
+
+service LeaderBoardService {
+  rpc CreateLeaderBoard(CreateLeaderBoardRequest) returns (CreateLeaderBoardResponse){} 
+  rpc FindOneLeaderBoard(FindOneLeaderBoardRequest) returns (FindOneLeaderBoardResponse) {}
+}
+
+message CreateLeaderBoardRequest {
+  string  name = 1;
+  int32   creator = 2;
+}
+
+message CreateLeaderBoardResponse {
+  string  name = 1;
+  Players players = 2;
+}
+
+
+message FindOneLeaderBoardRequest {
+  int32 leaderboardID = 1;
+}
+
+message FindOneLeaderBoardResponse {
+  string  name = 1;
+  Players players = 2;
+  int32 leaderBoardID = 3;
+}
+
+
+message Player {
+  string  username = 1;
+  int32   playerID = 2;
+  int32   score = 3;
+}
+
+message Players {
+  repeated Player users = 1;
+}
